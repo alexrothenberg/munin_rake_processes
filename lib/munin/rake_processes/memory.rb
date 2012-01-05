@@ -4,10 +4,12 @@ module Munin
 
       def config
         puts <<-CONFIG
+graph_args --lower-limit 0 --upper-limit 100
 graph_category #{graph_category}
-graph_info The Memory usage of Rake processes currently running - (possibly from cron)
-graph_title Memory usage of Rake Processes
-graph_vlabel Memory usage of Rake Processes
+graph_info The % of Memory currently used by each running Rake processes - (possibly from cron)
+graph_scale no
+graph_title Current Memory utilization of Rake Processes
+graph_vlabel Percent
         CONFIG
         rake_processes.each_key do |key|
           puts "#{key}_Memory.label #{key}_Memory"

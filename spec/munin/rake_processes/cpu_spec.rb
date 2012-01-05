@@ -15,10 +15,12 @@ describe Munin::RakeProcesses::Cpu do
 
     subject { captured_output }
     it { should == <<-OUTPUT
+graph_args --lower-limit 0 --upper-limit 100
 graph_category RakeProcesses
-graph_info The CPU usage of Rake processes currently running - (possibly from cron)
-graph_title CPU usage of Rake Processes
-graph_vlabel CPU usage of Rake Processes
+graph_info The % of CPU currently used by each running Rake processes - (possibly from cron)
+graph_scale no
+graph_title Current CPU utilization of Rake Processes
+graph_vlabel Percent
 some_user_25963_load_users_CPU.label some_user_25963_load_users_CPU
 some_user_27461_load_users_CPU.label some_user_27461_load_users_CPU
 some_user_27499_cron_CPU.label some_user_27499_cron_CPU

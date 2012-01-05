@@ -15,10 +15,12 @@ describe Munin::RakeProcesses::Memory do
 
     subject { captured_output }
     it { should == <<-OUTPUT
+graph_args --lower-limit 0 --upper-limit 100
 graph_category RakeProcesses
-graph_info The Memory usage of Rake processes currently running - (possibly from cron)
-graph_title Memory usage of Rake Processes
-graph_vlabel Memory usage of Rake Processes
+graph_info The % of Memory currently used by each running Rake processes - (possibly from cron)
+graph_scale no
+graph_title Current Memory utilization of Rake Processes
+graph_vlabel Percent
 some_user_25963_load_users_Memory.label some_user_25963_load_users_Memory
 some_user_27461_load_users_Memory.label some_user_27461_load_users_Memory
 some_user_27499_cron_Memory.label some_user_27499_cron_Memory

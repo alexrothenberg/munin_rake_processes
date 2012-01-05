@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.post_install_message = <<-POST_INSTALL_MESSAGE
   #{"*" * 80}
 
-    To install these munin plugins and start monitoring your rake processes run
+      To install these munin plugins and start monitoring your rake processes run
 
       munin_rake_processes_installer
 
