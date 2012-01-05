@@ -51,4 +51,4 @@ MIT
 
 POD
 
-Munin::RakeProcesses::Memory.new(ARGV, ENV).run
+Munin::RakeProcesses::Memory.new(ARGV, ENV)

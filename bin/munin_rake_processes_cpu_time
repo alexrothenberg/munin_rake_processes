@@ -51,4 +51,4 @@ MIT
 
 POD
 
-Munin::RakeProcesses::CpuTime.new(ARGV, ENV).run
+Munin::RakeProcesses::CpuTime.new(ARGV, ENV)

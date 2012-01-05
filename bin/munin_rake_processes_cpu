@@ -51,4 +51,4 @@ MIT
 
 POD
 
-Munin::RakeProcesses::Cpu.new(ARGV, ENV).run
+Munin::RakeProcesses::Cpu.new(ARGV, ENV)
