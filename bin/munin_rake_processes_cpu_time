@@ -5,37 +5,7 @@ require 'munin_rake_processes'
 pod=<<-POD
 
 =head1 NAME
-rake_processes_cpu_time - Munin plugin to monitor the minimum, average and maximum database times.
-
-=head1 APPLICABLE SYSTEMS
-All systems that have a rails application log.
-
-=head1 CONFIGURATION
-The request-log-analyzer gem has to be intalled.
-Also the script has to be able to access the rails log file and tail.
-This configuration section shows the defaults of the plugin:
-
-  [rails_database_time]
-  env.log_file '/path/to/production.log'
-  user www-data
-  command /usr/local/bin/ruby %c
-  log_format rails3
-
-Options
-  env.lines 50000                             # Number of lines to tail
-  env.interval 300                            # Munin interval in seconds (used for graphs and caching)
-  env.log_format                              # request-log-analyzer log format (passed to '--format')
-  env.request_log_analyzer '/usr/local/bin'   # Path to gem. Use this for Debian.
-  env.graph_category 'App'                    # Graph Category. Defaults to App.
-
-ln -s /usr/share/munin/plugins/rails_database_time /etc/munin/plugins/rails_database_time
-
-=head1 INTERPRETATION
-A line for each Rake process running & total number of rake processes
-
-=head1 MAGIC MARKERS
-  #%# family=auto
-  #%# capabilities=autoconf
+rake_processes_cpu_time - Munin plugin to monitor cumulative cpu time spent by currently running rake processes
 
 =head1 VERSION
 #{Munin::RakeProcesses::VERSION}
