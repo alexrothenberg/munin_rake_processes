@@ -20,7 +20,7 @@ module Munin
 
       def add_plugin(plugin)
         plugin_filename = "munin_rake_processes_#{plugin}"
-        plugin_path = `which #{plugin_filename}`
+        plugin_path = `which #{plugin_filename}`.strip
         FileUtils.mkdir_p(munin_plugins_path)      
         `ln -nsf "#{plugin_path}" "#{munin_plugins_path}/#{plugin_filename}"`      
         puts "Installing Munin plugin #{plugin_filename}"
