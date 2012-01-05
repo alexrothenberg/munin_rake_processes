@@ -14,4 +14,8 @@ Gem::Specification.new do |gem|
   gem.name          = "munin_rake_processes"
   gem.require_paths = ["lib"]
   gem.version       = Munin::RakeProcesses::VERSION
+
+  gem.add_development_dependency 'rspec', '>= 2.2'
+  gem.add_development_dependency 'rake'
+
 end

@@ -4,16 +4,14 @@ module Munin
 
       def config
         puts <<-CONFIG
-          graph_category #{graph_category}
-          graph_title CPU usage of Rake Processes
-          graph_vlabel CPU usage of Rake Processes
-          graph_info The CPU usage of Rake processes currently running - (possibly from cron)
+graph_category #{graph_category}
+graph_title CPU usage of Rake Processes
+graph_vlabel CPU usage of Rake Processes
+graph_info The CPU usage of Rake processes currently running - (possibly from cron)
         CONFIG
         rake_processes.each_key do |key|
           puts "#{key}_CPU.label #{key}_CPU"
         end
-
-        exit 0
       end
 
       def run

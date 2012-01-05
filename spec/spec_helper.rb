@@ -1,0 +1,26 @@
+require 'munin_rake_processes'
+
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+
+RSpec.configure do |c|
+end
+require 'ruby-debug'
+
+
+def stub_ps
+  Munin::RakeProcesses::Plugin.stub(:'`').and_return <<-PS_STRING
+some_user      25963   5.0  0.2   01:22:39 ruby /Users/alex/.rvm/gems/ruby-1.8.7-p334/bin/rake load_users
+some_user      27461   0.0  0.1   00:00:00 ruby /Users/alex/.rvm/gems/ruby-1.8.7-p334/bin/rake load_users
+some_user      27499  90.0  0.3    0:02.30 ruby /Users/alex/.rvm/gems/ruby-1.8.7-p334/bin/rake cron
+PS_STRING
+end
+
+def capture_output
+  $o_stdin, $o_stdout, $o_stderr = $stdin, $stdout, $stderr
+  $stdin, $stdout, $stderr = StringIO.new, StringIO.new, StringIO.new
+
+  yield
+
+ensure
+  $stdin, $stdout, $stderr = $o_stdin, $o_stdout, $o_stderr
+end
