@@ -9,14 +9,14 @@ graph_info The seconds of cumulative CPU time consumed by each Rake processes
 graph_title Cumulative CPU Time of Rake Processes
 graph_vlabel Seconds
         CONFIG
-        rake_processes.each_key do |key|
-          puts "#{key}_TIME.label #{key}_TIME"
+        rake_processes.each do |key, values|
+          puts "#{key}.label #{values[:label]}"
         end
       end
 
       def run
-        rake_processes.each do |cmd, values|
-          puts "#{cmd}_TIME.value #{values[:time]}"
+        rake_processes.each do |key, values|
+          puts "#{key}.value #{values[:time]}"
         end
       end
     end

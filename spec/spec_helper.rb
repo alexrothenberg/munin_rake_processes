@@ -8,8 +8,8 @@ end
 
 def stub_ps
   Munin::RakeProcesses::Plugin.stub(:'`').and_return <<-PS_STRING
-some_user      25963   5.0  0.2  140:48.69 ruby /Users/alex/.rvm/gems/ruby-1.8.7-p334/bin/rake load_users
-some_user      27461   0.0  0.1   00:00:00 ruby /Users/alex/.rvm/gems/ruby-1.8.7-p334/bin/rake load_users
+some_user      25963   5.0  0.2  140:48.69 ruby /Users/alex/.rvm/gems/ruby-1.8.7-p334/bin/rake users:load
+some_user      27461   0.0  0.1   00:00:00 ruby /Users/alex/.rvm/gems/ruby-1.8.7-p334/bin/rake users:load
 some_user      27499  90.0  0.3    0:02.30 ruby /Users/alex/.rvm/gems/ruby-1.8.7-p334/bin/rake cron
 PS_STRING
 end

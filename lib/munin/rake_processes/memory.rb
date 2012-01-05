@@ -11,14 +11,14 @@ graph_scale no
 graph_title Current Memory utilization of Rake Processes
 graph_vlabel Percent
         CONFIG
-        rake_processes.each_key do |key|
-          puts "#{key}_Memory.label #{key}_Memory"
+        rake_processes.each do |key, values|
+          puts "#{key}.label #{values[:label]}"
         end
       end
 
       def run
-        rake_processes.each do |cmd, values|
-          puts "#{cmd}_Memory.value #{values[:memory]}"
+        rake_processes.each do |key, values|
+          puts "#{key}.value #{values[:memory]}"
         end
       end
     end

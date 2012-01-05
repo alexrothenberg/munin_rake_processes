@@ -21,9 +21,9 @@ graph_info The % of Memory currently used by each running Rake processes - (poss
 graph_scale no
 graph_title Current Memory utilization of Rake Processes
 graph_vlabel Percent
-some_user_25963_load_users_Memory.label some_user_25963_load_users_Memory
-some_user_27461_load_users_Memory.label some_user_27461_load_users_Memory
-some_user_27499_cron_Memory.label some_user_27499_cron_Memory
+some_user_25963_users_load.label some_user (25963) users:load
+some_user_27461_users_load.label some_user (27461) users:load
+some_user_27499_cron.label some_user (27499) cron
 OUTPUT
     }
   end
@@ -35,9 +35,9 @@ OUTPUT
 
     subject { captured_output }
     it { should == <<-OUTPUT
-some_user_25963_load_users_Memory.value 0.2
-some_user_27461_load_users_Memory.value 0.1
-some_user_27499_cron_Memory.value 0.3
+some_user_25963_users_load.value 0.2
+some_user_27461_users_load.value 0.1
+some_user_27499_cron.value 0.3
 OUTPUT
     }
   end

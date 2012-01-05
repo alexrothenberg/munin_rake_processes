@@ -28,10 +28,11 @@ module Munin
           rake_ps_lines.each do |ps_line|
             user, pid, cpu, memory, cpu_time, cmd = ps_line.split ' ', 6
             cmd =~ /rake([^-]+)/
-            rake_cmd = $1.split('-').first.strip.gsub(/[^\w]/, '_')
-            label = "#{user}_#{pid}_#{rake_cmd}"
+            rake_cmd = $1.split('-').first.strip
+            key = "#{user}_#{pid}_#{rake_cmd.gsub(/[^\w]/, '_')}"
+            label = "#{user} (#{pid}) #{rake_cmd}"
             time_in_seconds = ps_time_to_seconds(cpu_time)
-            _rake_processes[label] = {:cpu => cpu, :memory => memory, :time => time_in_seconds}
+            _rake_processes[key] = {:cpu => cpu, :memory => memory, :time => time_in_seconds, :label => label}
           end
           _rake_processes
         end

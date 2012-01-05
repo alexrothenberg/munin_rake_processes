@@ -21,9 +21,9 @@ graph_info The % of CPU currently used by each running Rake processes - (possibl
 graph_scale no
 graph_title Current CPU utilization of Rake Processes
 graph_vlabel Percent
-some_user_25963_load_users_CPU.label some_user_25963_load_users_CPU
-some_user_27461_load_users_CPU.label some_user_27461_load_users_CPU
-some_user_27499_cron_CPU.label some_user_27499_cron_CPU
+some_user_25963_users_load.label some_user (25963) users:load
+some_user_27461_users_load.label some_user (27461) users:load
+some_user_27499_cron.label some_user (27499) cron
 OUTPUT
     }
   end
@@ -35,9 +35,9 @@ OUTPUT
 
     subject { captured_output }
     it { should == <<-OUTPUT
-some_user_25963_load_users_CPU.value 5.0
-some_user_27461_load_users_CPU.value 0.0
-some_user_27499_cron_CPU.value 90.0
+some_user_25963_users_load.value 5.0
+some_user_27461_users_load.value 0.0
+some_user_27499_cron.value 90.0
 OUTPUT
     }
   end

@@ -10,14 +10,14 @@ describe Munin::RakeProcesses::Plugin do
     its(:size) { should == 3 }
 
     describe 'old load_users' do
-      subject { rake_processes['some_user_25963_load_users'] }
+      subject { rake_processes['some_user_25963_users_load'] }
       its([:cpu   ]) { should == '5.0'   }
       its([:memory]) { should == '0.2'   }
       its([:time  ]) { should == 8448.69 }
     end
 
     describe 'hung old load_users' do
-      subject { rake_processes['some_user_27461_load_users'] }
+      subject { rake_processes['some_user_27461_users_load'] }
       its([:cpu   ]) { should == '0.0' }
       its([:memory]) { should == '0.1' }
       its([:time  ]) { should == 0.0   }
