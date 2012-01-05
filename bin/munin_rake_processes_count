@@ -21,6 +21,4 @@ MIT
 
 POD
 
-puts ['count 1', __FILE__, __LINE__].inspect
 Munin::RakeProcesses::Count.new(ARGV, ENV)
-puts ['count 2', __FILE__, __LINE__].inspect
