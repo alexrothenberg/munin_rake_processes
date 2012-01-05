@@ -13,12 +13,12 @@ describe Munin::RakeProcesses::Memory do
       Munin::RakeProcesses::Memory.new(['config'],{})
     end
 
-    subject { $stdout.string }
+    subject { captured_output }
     it { should == <<-OUTPUT
 graph_category RakeProcesses
+graph_info The Memory usage of Rake processes currently running - (possibly from cron)
 graph_title Memory usage of Rake Processes
 graph_vlabel Memory usage of Rake Processes
-graph_info The Memory usage of Rake processes currently running - (possibly from cron)
 some_user_25963_load_users_Memory.label some_user_25963_load_users_Memory
 some_user_27461_load_users_Memory.label some_user_27461_load_users_Memory
 some_user_27499_cron_Memory.label some_user_27499_cron_Memory
@@ -31,7 +31,7 @@ OUTPUT
       Munin::RakeProcesses::Memory.new([],{})
     end
 
-    subject { $stdout.string }
+    subject { captured_output }
     it { should == <<-OUTPUT
 some_user_25963_load_users_Memory.value 0.2
 some_user_27461_load_users_Memory.value 0.1

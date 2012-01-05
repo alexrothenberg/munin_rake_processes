@@ -23,3 +23,14 @@ def capture_output
 ensure
   $stdin, $stdout, $stderr = $o_stdin, $o_stdout, $o_stderr
 end
+
+def captured_output
+  sort_stdout_if_ruby_18
+  $stdout.string
+end
+
+def sort_stdout_if_ruby_18
+  if RUBY_VERSION < '1.9'  
+    $stdout.string = $stdout.string.split("\n").sort.join("\n") + "\n"
+  end
+end

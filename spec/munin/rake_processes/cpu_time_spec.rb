@@ -13,12 +13,12 @@ describe Munin::RakeProcesses::CpuTime do
       Munin::RakeProcesses::CpuTime.new(['config'],{})
     end
 
-    subject { $stdout.string }
+    subject { captured_output }
     it { should == <<-OUTPUT
 graph_category RakeProcesses
+graph_info The CPU time consumed of Rake processes currently running - (possibly from cron)
 graph_title CPU Time of Rake Processes
 graph_vlabel CPU Time of Rake Processes
-graph_info The CPU time consumed of Rake processes currently running - (possibly from cron)
 some_user_25963_load_users_TIME.label some_user_25963_load_users_TIME
 some_user_27461_load_users_TIME.label some_user_27461_load_users_TIME
 some_user_27499_cron_TIME.label some_user_27499_cron_TIME
@@ -31,7 +31,7 @@ OUTPUT
       Munin::RakeProcesses::CpuTime.new([],{})
     end
 
-    subject { $stdout.string }
+    subject { captured_output }
     it { should == <<-OUTPUT
 some_user_25963_load_users_TIME.value 8448.69
 some_user_27461_load_users_TIME.value 0.0
