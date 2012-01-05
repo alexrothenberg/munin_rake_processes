@@ -5,22 +5,22 @@ module Munin
       attr_accessor :graph_category
 
       def initialize(args, environment={})
-        self.graph_category = environment['graph_category'] || 'RakeProcesses'            
+        self.graph_category = environment['graph_category'] || 'RakeProcesses'
 
         case args[0]
-        when "config"   
+        when "config"
           config
-        when "autoconf"  
+        when "autoconf"
           autoconf
-        else                 
+        else
           run
         end
       end
 
       def self.rake_ps_string
-        `(ps -eo user,pid,%cpu,%mem,cputime,command | grep rake | grep -v grep | grep -v munin`        
+        `ps -eo user,pid,%cpu,%mem,cputime,command | grep -v -e grep -e munin | grep rake`
       end
-      
+
       def rake_processes
         @rake_processes ||= begin
           _rake_processes = {}
@@ -30,21 +30,28 @@ module Munin
             cmd =~ /rake([^-]+)/
             rake_cmd = $1.split('-').first.strip.gsub(/[^\w]/, '_')
             label = "#{user}_#{pid}_#{rake_cmd}"
-            time_in_seconds = Time.parse("1-1-1970 #{cpu_time}") - Time.parse('1-1-1970 00:00')
+            time_in_seconds = ps_time_to_seconds(cpu_time)
             _rake_processes[label] = {:cpu => cpu, :memory => memory, :time => time_in_seconds}
           end
           _rake_processes
         end
       end
-      
+
       def autoconf
         puts "yes"
       end
-      
+
       def run
-        # subclass me 
+        # overridden in subclasses but left here for rspec plugin_spec.rb
       end
-      
+
+      private
+      def ps_time_to_seconds(time_string)
+        seconds = 0
+        time_elements = time_string.split(':').reverse
+        time_elements.each_with_index {|element,index| seconds += element.to_f*(60**index)}
+        seconds
+      end
     end
   end
 end

@@ -11,23 +11,23 @@ describe Munin::RakeProcesses::Plugin do
 
     describe 'old load_users' do
       subject { rake_processes['some_user_25963_load_users'] }
-      its([:cpu   ]) { should == '5.0' }
-      its([:memory]) { should == '0.2' }
-      its([:time  ]) { should == 4959.0 }
+      its([:cpu   ]) { should == '5.0'   }
+      its([:memory]) { should == '0.2'   }
+      its([:time  ]) { should == 8448.69 }
     end
 
     describe 'hung old load_users' do
       subject { rake_processes['some_user_27461_load_users'] }
       its([:cpu   ]) { should == '0.0' }
       its([:memory]) { should == '0.1' }
-      its([:time  ]) { should == 0.0 }
+      its([:time  ]) { should == 0.0   }
     end
 
     describe 'hung old load_users' do
       subject { rake_processes['some_user_27499_cron'] }
       its([:cpu   ]) { should == '90.0' }
-      its([:memory]) { should == '0.3' }
-      its([:time  ]) { should == 120.0 }
+      its([:memory]) { should == '0.3'  }
+      its([:time  ]) { should == 2.3    }
     end
   end
 end

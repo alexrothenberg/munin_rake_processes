@@ -34,8 +34,8 @@ OUTPUT
     subject { $stdout.string }
     it { should == <<-OUTPUT
 some_user_27461_load_users_TIME.value 0.0
-some_user_25963_load_users_TIME.value 4959.0
-some_user_27499_cron_TIME.value 120.0
+some_user_25963_load_users_TIME.value 8448.69
+some_user_27499_cron_TIME.value 2.3
 OUTPUT
     }
   end
