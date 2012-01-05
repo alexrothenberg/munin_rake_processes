@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+$:.unshift(File.expand_path('../lib', File.dirname(__FILE__)))
+
+require 'munin_rake_processes'
+
+Munin::RakeProcesses::Installer.new(ARGV)
