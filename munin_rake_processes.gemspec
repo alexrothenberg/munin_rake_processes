@@ -25,7 +25,7 @@ Gem::Specification.new do |gem|
     Enjoy!
 
   #{"*" * 80}
-    POST_INSTALL_MESSAGE
+  POST_INSTALL_MESSAGE
 
   gem.add_development_dependency 'rspec', '>= 2.2'
   gem.add_development_dependency 'rake'
