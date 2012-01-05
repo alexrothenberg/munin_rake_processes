@@ -1,3 +1,5 @@
+require 'time'
+
 require "munin/rake_processes/version"
 require "munin/rake_processes/plugin"
 require "munin/rake_processes/count"

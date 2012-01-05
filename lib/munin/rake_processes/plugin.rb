@@ -14,37 +14,25 @@ module Munin
         end
       end
 
-      def run_command(command, debug = false)
-        result = `#{command}`
-
-        unless $?.success?
-          $stderr.puts "failed executing #{command}"
-          exit 1
-        end
-
-        puts result if debug
-
-        result
-      end
-
       def rake_processes
         @rake_processes ||= begin
           _rake_processes = {}
-          rake_process_lines = run_command('ps aux | grep rake | grep -v grep | grep -v /etc/munin/plugins', debug).split("\n")
-          rake_process_lines.each do |rake_process|
-            cmd  = rake_process[65,1000]
+          rake_ps_lines = `ps -eo user,pid,%cpu,%mem,cputime,command | grep rake | grep -v grep | grep -v munin`.split("\n")
+          rake_ps_lines.each do |ps_line|
+            user, pid, cpu, memory, cpu_time, cmd = ps_line.split ' ', 6
             cmd =~ /rake([^-]+)/
             rake_cmd = $1.split('-').first.strip.gsub(/[^\w]/, '_')
-            time = rake_process[60,5].strip
-            time =~ /(\d+):(\d+)$/
-            time_in_seconds = $1.to_i*60 + $2.to_i
-            user = rake_process[0,9].strip
-            pid  = rake_process[10,5].strip
             label = "#{user}_#{pid}_#{rake_cmd}"
-            _rake_processes[label] = {:cpu => rake_process[16,4].strip, :mem => rake_process[21,4].strip, :time => time_in_seconds}
+            time_in_seconds = Time.parse("1-1-1970 #{cpu_time}") - Time.parse('1-1-1970 00:00')
+            _rake_processes[label] = {:cpu => cpu, :memory => memory, :time => time_in_seconds}
           end
           _rake_processes
         end
+      end
+      
+      def autoconf
+        puts "yes"
+        exit 0      
       end
     end
   end

@@ -5,7 +5,7 @@ require 'munin_rake_processes'
 pod=<<-POD
 
 =head1 NAME
-rake_processes_count - Munin plugin to monitor the minimum, average and maximum database times.
+rake_processes_cpu_time - Munin plugin to monitor the minimum, average and maximum database times.
 
 =head1 APPLICABLE SYSTEMS
 All systems that have a rails application log.
@@ -51,4 +51,4 @@ MIT
 
 POD
 
-Munin::RakeProcesses::Count.new(ARGV, ENV).run
+Munin::RakeProcesses::CpuTime.new(ARGV, ENV).run
