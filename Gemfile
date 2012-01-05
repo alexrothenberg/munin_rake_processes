@@ -3,4 +3,3 @@ source 'http://rubygems.org'
 # Specify your gem's dependencies in munin_rake_processes.gemspec
 gemspec
 
-gem 'ruby-debug'
