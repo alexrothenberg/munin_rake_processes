@@ -1,73 +1,26 @@
-# Ammeter [![Build Status](https://secure.travis-ci.org/alexrothenberg/ammeter.png)](http://travis-ci.org/alexrothenberg/ammeter)
+# Munin Rake Processes [![Build Status](https://secure.travis-ci.org/alexrothenberg/munin_rake_processes.png)](http://travis-ci.org/alexrothenberg/munin_rake_processes)
 
-A gem that makes it easy to write specs for your Rails 3 Generators.
+Some Munin plugins to monitor running rake tasks.
 
-RSpec is using ammeter to 
-[spec](https://github.com/rspec/rspec-rails/blob/master/spec/generators/rspec/model/model_generator_spec.rb) 
-[its](https://github.com/rspec/rspec-rails/blob/master/spec/generators/rspec/controller/controller_generator_spec.rb) 
-[own](https://github.com/rspec/rspec-rails/blob/master/spec/generators/rspec/helper/helper_generator_spec.rb) 
-[generators](https://github.com/rspec/rspec-rails/blob/master/spec/generators/rspec/scaffold/scaffold_generator_spec.rb)
-and we think you may find it useful too.
+Rake tasks are often run on the server using cron or some other scheduler. This gem lets you monitor so you can tell
 
-An [ammeter](http://en.wikipedia.org/wiki/Ammeter) is used to measure electrical current and 
-electricity can be produced by a generator.
+* how many are running
+* how long they've been running
+* how much cpu they are using
+* how much memory they are using
 
-# Example
+# Usage
 
-    require 'spec_helper'
+    gem install munin_rake_processes
+    
+    munin_rake_processes_installer
+    # will install all 4 munin plugins
 
-    # Generators are not automatically loaded by Rails
-    require 'generators/rspec/model/model_generator'
+    munin_rake_processes_installer count
+    # will install just the count munin plugin
 
-    describe Rspec::Generators::ModelGenerator do
-      # Tell the generator where to put its output (what it thinks of as Rails.root)
-      destination File.expand_path("../../../../../tmp", __FILE__)
-      before do
-        prepare_destination
-      end
-
-      # using mocks to ensure proper methods are called
-      # invoke_all - will call all the tasks in the generator
-      it 'should run all tasks in the generator' do
-        gen = generator %w(posts)
-        gen.should_receive :create_model_spec
-        gen.should_receive :create_fixture_file
-        capture(:stdout) { gen.invoke_all }
-      end
-
-      # invoke_task - will call just the named task in the generator
-      it 'should run a specific tasks in the generator' do
-        gen = generator %w(posts)
-        gen.should_receive     :create_model_spec
-        gen.should_not_receive :create_fixture_file
-        capture(:stdout) { gen.invoke_task :create_model_spec }
-      end
-
-      # custom matchers make it easy to verify what the generator creates
-      describe 'the generated files' do
-        before do
-          run_generator %w(posts)
-        end
-        describe 'the spec' do
-          # file - gives you the absolute path where the generator will create the file
-          subject { file('spec/models/posts_spec.rb') }
-
-          # should exist - verifies the file exists
-          it { should exist }
-
-          # should contain - verifies the file's contents
-          it { should contain /require 'spec_helper'/ }
-          it { should contain /describe Posts/ }
-        end
-        describe 'the migration' do
-          subject { file('db/migrate/create_posts.rb') }
-
-          # should be_a_migration - verifies the file exists with a migration timestamp as part of the filename 
-          it { should be_a_migration }
-        end
-      end
-    end
-
+    munin_rake_processes_installer count cpu_time
+    # will install just the count and cpu_time munin plugins (any combination will work)
 
 # Contributing
 
@@ -82,4 +35,3 @@ electricity can be produced by a generator.
 # Copyright
 
 Copyright © 2011 Alex Rothenberg. See LICENSE.txt for further details.
-rake_processes_count - Munin plugin to monitor the minimum, average and maximum database times.
