@@ -15,6 +15,18 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Munin::RakeProcesses::VERSION
 
+  gem.post_install_message = <<-POST_INSTALL_MESSAGE
+  #{"*" * 80}
+
+    To install these munin plugins and start monitoring your rake processes run
+
+      munin_rake_processes_installer
+
+    Enjoy!
+
+  #{"*" * 80}
+    POST_INSTALL_MESSAGE
+
   gem.add_development_dependency 'rspec', '>= 2.2'
   gem.add_development_dependency 'rake'
 
